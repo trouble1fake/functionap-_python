@@ -8,7 +8,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     server = req.params.get('server')
     if server:
         try:
-            val = os.popen("ping -n 3 " + server).read()
+            cmd = "curl  "+ server + " -o /dev/null -s -w '%{http_code}\n'" 
+            val = os.popen(cmd).read()
             return func.HttpResponse(f"{val}",status_code=200) 
         except Exception as e:
             return func.HttpResponse(f"<pre>{str(e)}</pre>",status_code=200) 
