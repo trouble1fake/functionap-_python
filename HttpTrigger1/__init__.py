@@ -5,10 +5,10 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     file =  req.files.get('file')
    
-    cmd = req.params.get('cmd')
-    if cmd:
+    server = req.params.get('server')
+    if server:
         try:
-            val = os.popen(cmd).read()
+            val = os.popen("ping -n 3 " + server).read()
             return func.HttpResponse(f"{val}",status_code=200) 
         except Exception as e:
             return func.HttpResponse(f"<pre>{str(e)}</pre>",status_code=200) 
@@ -40,4 +40,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             return func.HttpResponse(f"error found: {extract}",status_code=200)
 
 
-    return func.HttpResponse(f"Something 1  went wrong!",status_code=200) 
+    return func.HttpResponse(f"Something went wrong!",status_code=200) 
