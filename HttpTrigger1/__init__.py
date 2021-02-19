@@ -40,4 +40,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             return func.HttpResponse(f"error found: {extract}",status_code=200)
 
 
-    return func.HttpResponse(f"Something went wrong!",status_code=200) 
+    return func.HttpResponse(f"Something 1  went wrong!",status_code=200) 
